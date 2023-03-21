@@ -1,0 +1,41 @@
+//tag::vardef[]
+:gh-repo-owner: jmini
+:gh-repo-name: quarkus-experiments
+:project-name: Quarkus Experiments
+:branch: main
+:twitter-handle: j2r2b
+:license: http://www.apache.org/licenses/LICENSE-2.0
+:license-name: Apache 2.0 License
+
+:git-repository: {gh-repo-owner}/{gh-repo-name}
+:homepage: https://{gh-repo-owner}.github.io/{gh-repo-name}
+:issues: https://github.com/{git-repository}/issues
+//end::vardef[]
+
+//tag::header[]
+= {project-name}
+Experiments with Quarkus
+//end::header[]
+
+//tag::description[]
+== Description
+This repository contains some experiments I do with https://quarkus.com/[Quarkus] and https://github.com/quarkus4j/quarkus4j-api[quarkus4j].
+
+//end::description[]
+
+
+// Read more on the link:{homepage}[project home page].
+
+//tag::contact-section[]
+== Get in touch
+
+Use the link:{issues}[{project-name} issue tracker] on GitHub.
+
+You can also contact me on Twitter: link:https://twitter.com/{twitter-handle}[@{twitter-handle}]
+//end::contact-section[]
+
+//tag::license-section[]
+== License
+
+link:{license}[{license-name}]
+//end::license-section[]
