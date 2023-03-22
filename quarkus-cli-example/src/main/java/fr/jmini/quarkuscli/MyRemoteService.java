@@ -1,33 +1,37 @@
 package fr.jmini.quarkuscli;
 
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import java.util.Base64;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import java.util.List;
-import java.util.Set;
 
-/**
- * To use it via injection.
- *
- * {@code @Inject
- * 
- * @RestClient MyRemoteService myRemoteService;
- *
- * public void doSomething() { Set<MyRemoteService.Extension> restClientExtensions = myRemoteService.getExtensionsById("io.quarkus:quarkus-rest-client"); } }
- */
-@RegisterRestClient(baseUri = "https://stage.code.quarkus.io/api")
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+
+import fr.jmini.quarkuscli.sonar.ProjectStatusResponse;
+import fr.jmini.quarkuscli.sonar.PullRequestsResponse;
+import io.quarkus.logging.Log;
+
+@Path("/api")
+@ClientHeaderParam(name = "Authorization", value = "{lookupAuth}")
 public interface MyRemoteService {
 
-	@GET
-	@Path("/extensions")
-	Set<Extension> getExtensionsById(@QueryParam("id") String id);
-
-	class Extension {
-		public String id;
-		public String name;
-		public String shortName;
-		public List<String> keywords;
+	default String lookupAuth() {
+		String token = ConfigProvider.getConfig().getValue("sonar.api.token", String.class);
+		if (token == null) {
+			Log.error("Sonar token is not defined");
+			return null;
+		}
+		return "Basic " + Base64.getEncoder().encodeToString((token + ":").getBytes());
 	}
+
+	@GET
+	@Path("/qualitygates/project_status")
+	ProjectStatusResponse getProjectStatus(@QueryParam("projectKey") String projectKey, @QueryParam("pullRequest") String pullRequest);
+
+	@GET
+	@Path("/project_pull_requests/list")
+	PullRequestsResponse listPullRequests(@QueryParam("project") String projectKey);
+
 }
