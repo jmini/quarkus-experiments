@@ -23,6 +23,7 @@ This repository contains some experiments I do with https://quarkus.com/[Quarkus
 
 //end::description[]
 
+* xref:quarkus-cli-example/README.adoc[Cli with REST client example]
 
 // Read more on the link:{homepage}[project home page].
 
