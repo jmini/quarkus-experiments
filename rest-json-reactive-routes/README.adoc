@@ -1,0 +1,5 @@
+== Rest-json example with Reactive routes
+
+This project is a copy from the https://github.com/quarkusio/quarkus-quickstarts/tree/main/rest-json-quickstart[rest-json quickstart] project (copied from commit https://github.com/quarkusio/quarkus-quickstarts/commit/3f7e885525a70e3eb022c73de49871017212a6d4[3f7e885]), updated to use https://quarkus.io/guides/reactive-routes[Reactive routes].
+
+Corresponding Quarkus guide: https://quarkus.io/guides/rest-json[rest-json]
