@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import io.quarkus.vertx.web.Body;
+import io.quarkus.vertx.web.Route;
+import io.quarkus.vertx.web.Route.HttpMethod;
+import io.quarkus.vertx.web.RouteBase;
 
-@Path("/fruits")
+@RouteBase(path = "fruits")
 public class FruitResource {
 
     private Set<Fruit> fruits = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
@@ -19,19 +19,19 @@ public class FruitResource {
         fruits.add(new Fruit("Pineapple", "Tropical fruit"));
     }
 
-    @GET
+    @Route(path="", methods = HttpMethod.GET)
     public Set<Fruit> list() {
         return fruits;
     }
 
-    @POST
-    public Set<Fruit> add(Fruit fruit) {
+    @Route(path="", methods = HttpMethod.POST)
+    public Set<Fruit> add(@Body Fruit fruit) {
         fruits.add(fruit);
         return fruits;
     }
 
-    @DELETE
-    public Set<Fruit> delete(Fruit fruit) {
+    @Route(path="", methods = HttpMethod.DELETE)
+    public Set<Fruit> delete(@Body Fruit fruit) {
         fruits.removeIf(existingFruit -> existingFruit.name.contentEquals(fruit.name));
         return fruits;
     }

@@ -4,11 +4,14 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import io.quarkus.vertx.web.Route;
+import io.quarkus.vertx.web.Route.HttpMethod;
+import io.quarkus.vertx.web.RouteBase;
+import io.quarkus.vertx.web.RoutingExchange;
+import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.json.Json;
 
-@Path("/legumes")
+@RouteBase(path = "legumes")
 public class LegumeResource {
 
     private Set<Legume> legumes = Collections.synchronizedSet(new LinkedHashSet<>());
@@ -18,8 +21,11 @@ public class LegumeResource {
         legumes.add(new Legume("Zucchini", "Summer squash"));
     }
 
-    @GET
-    public Response list() {
-        return Response.ok(legumes).build();
+    @Route(path="", methods = HttpMethod.GET)
+    public void list(RoutingExchange re) {
+        String body = Json.encode(legumes);
+        re.ok()
+            .putHeader(HttpHeaders.CONTENT_TYPE.toString(), "application/json")
+            .end(body);
     }
 }

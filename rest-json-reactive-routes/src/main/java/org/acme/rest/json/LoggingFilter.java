@@ -1,33 +1,22 @@
 package org.acme.rest.json;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.ext.Provider;
-
 import org.jboss.logging.Logger;
 
-import io.vertx.core.http.HttpServerRequest;
+import io.quarkus.vertx.web.RouteFilter;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@Provider
-public class LoggingFilter implements ContainerRequestFilter {
+public class LoggingFilter {
 
     private static final Logger LOG = Logger.getLogger(LoggingFilter.class);
 
-    @Context
-    UriInfo info;
+    @RouteFilter(100) 
+    void myFilter(RoutingContext rc) {
+       final HttpMethod method = rc.request().method();
+       final String path = rc.request().path();
+       final String address = rc.request().remoteAddress().toString();
 
-    @Context
-    HttpServerRequest request;
-
-    @Override
-    public void filter(ContainerRequestContext context) {
-
-        final String method = context.getMethod();
-        final String path = info.getPath();
-        final String address = request.remoteAddress().toString();
-
-        LOG.infof("Request %s %s from IP %s", method, path, address);
+       LOG.infof("Request %s %s from IP %s", method, path, address);
+       rc.next(); 
     }
 }
