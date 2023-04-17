@@ -1,0 +1,90 @@
+== Quarkus Log in GCP
+
+In order to have the log produced by Quarkus correctly displayed in Google Cloud Platform (GCP), each log entry needs to be a JSON document with specific fields.
+
+* Documentation: https://cloud.google.com/logging/docs/structured-logging[Structured logging]
+* Expected format: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry[LogEntry]
+
+Quarkus provides several ways to produce JSON log.
+
+NOTE: *TL;DR*: the xref:#quarkus-googlecloud-jsonlogging[quarkus-googlecloud-jsonlogging] extention is the one that seems to work.
+
+=== Platform extension `quarkus-logging-json`
+
+See the https://quarkus.io/guides/logging[Quarkus logging guide]
+
+Coordinates:
+
+[source, xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-logging-json</artifactId>
+</dependency>
+----
+
+But the produced JSON does not contains the expected fields.
+
+=== Quarkiverse extension `quarkus-logging-json`
+
+Project: https://github.com/quarkiverse/quarkus-logging-json
+
+Coordinates:
+
+[source, xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.loggingjson</groupId>
+    <artifactId>quarkus-logging-json</artifactId>
+</dependency>
+----
+
+There are 2 PRs open to support the GCP layout:
+
+* https://github.com/quarkiverse/quarkus-logging-json/pull/180[quarkiverse/quarkus-logging-json#180]
+* https://github.com/quarkiverse/quarkus-logging-json/pull/158[quarkiverse/quarkus-logging-json#158]
+
+So for now this project can not be used.
+
+[#quarkus-googlecloud-jsonlogging]
+=== Other extension `quarkus-googlecloud-jsonlogging`
+
+Project https://github.com/benkard/quarkus-googlecloud-jsonlogging
+
+Coordinates:
+
+[source, xml]
+----
+<dependency>
+    <groupId>eu.mulk.quarkus-googlecloud-jsonlogging</groupId>
+    <artifactId>quarkus-googlecloud-jsonlogging</artifactId>
+</dependency>
+----
+
+This project works.
+As soon as it is added to the dependencies, the logs are produced in the JSON format.
+
+It is possible to disable it for test and dev mode with:
+
+[source, properties]
+----
+%dev.quarkus.log.console.google=false
+%test.quarkus.log.console.google=false
+----
+
+
+=== Quarkiverse extension `quarkus-google-cloud-logging`
+
+Project https://quarkiverse.github.io/quarkiverse-docs/quarkus-google-cloud-services/main/logging.html
+
+Coordinates:
+
+[source, xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.googlecloudservices</groupId>
+    <artifactId>quarkus-google-cloud-logging</artifactId>
+</dependency>
+----
+
+The goal of this project seems to be a little bit different.
