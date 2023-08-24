@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'org.kordamp.gradle.jandex' version '1.1.0'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-arc'
+}
+
+tasks.named("quarkusDependenciesBuild") {
+    inputs.files(tasks.getByPath(":core-lib:jandex").outputs.files)
+}
+
+//Workaround for https://github.com/kordamp/jandex-gradle-plugin/issues/24:
+tasks.named('jandex') {
+    inputs.files(sourceSets.findByName('main').output.classesDirs*.absolutePath.flatten())
+        .withPropertyName('mainSourceSet')
+        .withPathSensitivity(PathSensitivity.RELATIVE)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}

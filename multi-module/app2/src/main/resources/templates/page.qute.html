@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        h1 {
+            color: #4695EB;
+            font-size: 6vw;
+        }
+
+        h1 b {
+            color: #be9100;
+        }
+
+        p {
+            font-size: 2vw;
+        }
+    </style>
+</head>
+<body>
+<h1>Messages</h1>
+
+<ul>
+{#each messages}
+  <li><p>{it}</p></li>
+{/each}
+</ul>
+
+<p>End</p>
+</body>
+</html>
