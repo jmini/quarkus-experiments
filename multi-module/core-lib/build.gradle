@@ -1,5 +1,6 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "1.8.21"
+    id 'org.jetbrains.kotlin.jvm' version "1.9.0"
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.9.0"
     id 'java'
     id 'io.quarkus'
     id 'org.kordamp.gradle.jandex' version '1.1.0'
@@ -12,6 +13,8 @@ repositories {
 
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'io.quarkus:quarkus-arc'
 }
 
@@ -44,6 +47,12 @@ compileJava {
 
 compileTestJava {
     options.encoding = 'UTF-8'
+}
+
+allOpen {
+    annotation("jakarta.ws.rs.Path")
+    annotation("jakarta.enterprise.context.ApplicationScoped")
+    annotation("io.quarkus.test.junit.QuarkusTest")
 }
 
 compileKotlin {
