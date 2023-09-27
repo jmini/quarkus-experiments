@@ -1,0 +1,5 @@
+== quarkus-jbang-run 
+
+Jbang script to run the quarkus picocli app published in the repo https://github.com/jmini/quarkus-picocli-experiment[jmini/quarkus-picocli-experiment] (using Jitpack)
+
+Discussion in the Jbang project: https://github.com/jbangdev/jbang/discussions/1682
