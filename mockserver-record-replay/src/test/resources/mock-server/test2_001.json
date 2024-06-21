@@ -1,0 +1,56 @@
+{
+  "httpRequest" : {
+    "method" : "GET",
+    "path" : "/api/people/2",
+    "headers" : {
+      "host" : [ "localhost:9999" ],
+      "content-length" : [ "0" ],
+      "User-Agent" : [ "Quarkus REST Client" ]
+    },
+    "keepAlive" : true,
+    "secure" : false,
+    "protocol" : "HTTP_1_1"
+  },
+  "httpResponse" : {
+    "statusCode" : 200,
+    "reasonPhrase" : "OK",
+    "headers" : {
+      "X-Frame-Options" : [ "SAMEORIGIN" ],
+      "Vary" : [ "Accept, Cookie" ],
+      "Server" : [ "nginx/1.16.1" ],
+      "ETag" : [ "\"9b26343343f02f4e166fbc85a07eb8b0\"" ],
+      "Content-Type" : [ "application/json" ],
+      "Allow" : [ "GET, HEAD, OPTIONS" ]
+    },
+    "body" : {
+      "contentType" : "application/json",
+      "type" : "JSON",
+      "json" : {
+        "name" : "C-3PO",
+        "height" : "167",
+        "mass" : "75",
+        "hair_color" : "n/a",
+        "skin_color" : "gold",
+        "eye_color" : "yellow",
+        "birth_year" : "112BBY",
+        "gender" : "n/a",
+        "homeworld" : "http://localhost:9999/api/planets/1/",
+        "films" : [ "http://localhost:9999/api/films/1/", "http://localhost:9999/api/films/2/", "http://localhost:9999/api/films/3/", "http://localhost:9999/api/films/4/", "http://localhost:9999/api/films/5/", "http://localhost:9999/api/films/6/" ],
+        "species" : [ "http://localhost:9999/api/species/2/" ],
+        "vehicles" : [ ],
+        "starships" : [ ],
+        "created" : "2014-12-10T15:10:51.357000Z",
+        "edited" : "2014-12-20T21:17:50.309000Z",
+        "url" : "http://localhost:9999/api/people/2/"
+      }
+    }
+  },
+  "id" : "b70efa90-d30b-49fa-8168-3cbdf5c07911",
+  "priority" : 0,
+  "timeToLive" : {
+    "unlimited" : true
+  },
+  "times" : {
+    "remainingTimes" : 1
+  }
+}
