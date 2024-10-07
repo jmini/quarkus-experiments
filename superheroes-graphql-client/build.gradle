@@ -45,3 +45,13 @@ spotless {
         removeUnusedImports()
     }
 }
+
+//upgrade 'smallrye-graphql-*' projects, see https://github.com/quarkusio/quarkus/issues/43756
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'io.smallrye' && details.requested.name.startsWith('smallrye-graphql') && details.requested.version == '2.9.2') {
+            details.useVersion '2.10.0'
+            details.because 'See issue #43756'
+        }
+    }
+}
