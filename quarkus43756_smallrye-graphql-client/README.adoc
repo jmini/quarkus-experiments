@@ -1,0 +1,46 @@
+== quarkus43756_smallrye-graphql-client
+
+Investigations for issue https://github.com/quarkusio/quarkus/issues/43756[quarkusio/quarkus#43756]
+
+Same implementation as link:../superheroes-graphql-client[superheroes-graphql-client] but without quarkus.
+
+To run it:
+
+```
+./gradlew run
+```
+
+The main class is link:src/main/java/run/Client.java[Client.java]
+The client model classes and interface are the same as in the quarkus application (packages `superheroes.api` and `superheroes.model`)
+
+Use `gradle.properties` to change the smallrye version.
+
+=== With 2.9.2
+
+```
+> Task :run
+response: [City [name=Gotham City, symbol=GC], City [name=New York City, symbol=NYC]]
+Exception in thread "main" GraphQlClientException: errors from service
+errors:
+- Error{message=Unparseable input document, locations=[], path=null, extensions={classification=DataFetchingException}})
+        at io.smallrye.graphql.client.impl.typesafe.ResultBuilder.readErrors(ResultBuilder.java:111)
+        at io.smallrye.graphql.client.impl.typesafe.ResultBuilder.read(ResultBuilder.java:67)
+        at io.smallrye.graphql.client.vertx.typesafe.VertxTypesafeGraphQLClientProxy.executeSingleResultOperationOverHttpSync(VertxTypesafeGraphQLClientProxy.java:178)
+        at io.smallrye.graphql.client.vertx.typesafe.VertxTypesafeGraphQLClientProxy.invoke(VertxTypesafeGraphQLClientProxy.java:160)
+        at io.smallrye.graphql.client.vertx.typesafe.VertxTypesafeGraphQLClientBuilder.invoke(VertxTypesafeGraphQLClientBuilder.java:231)
+        at io.smallrye.graphql.client.vertx.typesafe.VertxTypesafeGraphQLClientBuilder.lambda$build$0(VertxTypesafeGraphQLClientBuilder.java:191)
+        at jdk.proxy2/jdk.proxy2.$Proxy2.allSuperheroes(Unknown Source)
+        at run.Client.main(Client.java:22)
+```
+
+Same error as with Quarkus.
+
+=== With 2.10.0
+
+```
+> Task :run
+response: [City [name=Gotham City, symbol=GC], City [name=New York City, symbol=NYC]]
+response: [Superhero [abilities=[Superpower [name=Genius-Level Intellect], Superpower [name=Expert Martial Artist], Superpower [name=Master Detective], Superpower [name=Peak Human Conditioning], Superpower [name=Expert in Stealth], Superpower [name=Proficient in Various Weapons], Superpower [name=Access to Advanced Technology], Attribute [motivation=Genius-level intellect with vast knowledge in various fields, name=Intelligence, rating=100], Attribute [motivation=Peak human strength, trained to physical perfection, name=Strength, rating=85], Attribute [motivation=Highly trained agility and quick reflexes, name=Speed, rating=70], Attribute [motivation=Strategic mind with considerable influence in combat, name=Power, rating=75], Attribute [motivation=Expert martial artist, skilled in various forms of combat, name=Combat, rating=95], Attribute [motivation=High endurance, capable of withstanding significant physical punishment, name=Durability, rating=80]], city=City [name=Gotham City, symbol=GC], gender=MALE, name=Batman], Superhero [abilities=[Superpower [name=Agility], Superpower [name=Enhanced Reflexes], Superpower [name=Acrobatics], Superpower [name=Stealth], Superpower [name=Expert Hand-to-Hand Combatant], Superpower [name=Cat-Like Reflexes], Superpower [name=Master Thief], Attribute [motivation=Clever and resourceful, often outsmarts opponents, name=Intelligence, rating=85], Attribute [motivation=Strong for a human, with above-average physical capabilities, name=Strength, rating=60], Attribute [motivation=Known for agility and quick reflexes, name=Speed, rating=80], Attribute [motivation=Relies on skills and cunning rather than raw power, name=Power, rating=50], Attribute [motivation=Proficient in hand-to-hand combat and acrobatics, name=Combat, rating=75], Attribute [motivation=Can endure physical punishment, though still vulnerable, name=Durability, rating=65]], city=City [name=Gotham City, symbol=GC], gender=FEMALE, name=Catwoman], Superhero [abilities=[Superpower [name=Superhuman Strength], Superpower [name=Wall-Crawling], Superpower [name=Spider-Sense], Superpower [name=Enhanced Reflexes], Superpower [name=Web-Shooting], Superpower [name=Agility], Superpower [name=Stealth], Attribute [motivation=Highly intelligent, especially in science and technology, name=Intelligence, rating=85], Attribute [motivation=Superhuman strength, able to lift several tons, name=Strength, rating=80], Attribute [motivation=Quick reflexes and agility, allowing for rapid movement, name=Speed, rating=75], Attribute [motivation=High-level powers, including web-slinging and wall-crawling, name=Power, rating=90], Attribute [motivation=Skilled in hand-to-hand combat but relies more on agility and reflexes, name=Combat, rating=70], Attribute [motivation=Able to withstand injuries better than an average human, thanks to his powers, name=Durability, rating=70]], city=City [name=New York City, symbol=NYC], gender=MALE, name=Spider Man]]
+```
+
+Ok.
