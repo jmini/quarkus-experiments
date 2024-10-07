@@ -19,12 +19,13 @@ Experiments with Quarkus
 
 //tag::description[]
 == Description
-This repository contains some experiments I do with https://quarkus.com/[Quarkus] and https://github.com/quarkus4j/quarkus4j-api[quarkus4j].
+This repository contains some experiments I do with https://quarkus.com/[Quarkus].
 
 //end::description[]
 
 * xref:quarkus-cli-example/README.adoc[Cli with REST client example]
 * xref:rest-json-reactive-routes/README.adoc[Convert 'rest-json' example to reactive routes]
+* xref:superheroes-graphql-client/[GraphQL client] (for the GraphQL server https://github.com/jmini/quarkus-graphql-superheroes[jmini/quarkus-graphql-superheroes])
 
 // Read more on the link:{homepage}[project home page].
 
