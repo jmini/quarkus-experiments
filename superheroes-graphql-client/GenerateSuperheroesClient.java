@@ -25,6 +25,7 @@ import fr.jmini.gql.codegen.config.GraphQLClientApiAnnotation;
 import fr.jmini.gql.codegen.config.IncludeStrategy;
 import fr.jmini.gql.codegen.config.Scope;
 import fr.jmini.gql.schema.model.IntrospectionResponse;
+import fr.jmini.gql.schema.model.Kind;
 import fr.jmini.gql.schema.model.Schema;
 
 class GenerateSuperheroesClient {
@@ -49,7 +50,7 @@ class GenerateSuperheroesClient {
                 .setScope(new Scope() //
                         .setDefaultStrategy(IncludeStrategy.INCLUDE_ALL) //
                         .addFilter(new FieldsFilter() //
-                                .setTypeKind("OBJECT") //
+                                .setTypeKind(Kind.OBJECT) //
                                 .setTypeName("City") //
                                 .addExcludeName("superheroes") //
                         ) //
