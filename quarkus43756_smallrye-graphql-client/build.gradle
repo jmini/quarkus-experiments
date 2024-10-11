@@ -15,6 +15,7 @@ dependencies {
     implementation 'org.eclipse:yasson:2.0.4' // should no longer be necessary with version after '2.10.0' see https://github.com/smallrye/smallrye-graphql/pull/2196
     implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.1'
     //implementation("jakarta.json:jakarta.json-api:2.0.1")
+    runtimeOnly 'org.jboss.logmanager:jboss-logmanager:3.0.6.Final'
 
     testImplementation libs.junit.jupiter
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -34,4 +35,5 @@ tasks.named('test') {
 
 application {
     mainClass = 'run.Client'
+    applicationDefaultJvmArgs = ['-Djava.util.logging.manager=org.jboss.logmanager.LogManager']
 }
