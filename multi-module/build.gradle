@@ -1,3 +1,7 @@
+wrapper {
+    gradleVersion = '8.10.1'
+}
+
 subprojects {
     group 'org.acme'
     version '1.0.0-SNAPSHOT'
