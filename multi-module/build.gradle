@@ -1,8 +1,27 @@
+plugins {
+    id 'io.quarkus' apply false
+    id 'org.kordamp.gradle.jandex' version '2.1.0' apply false
+}
+
+
 wrapper {
     gradleVersion = '8.10.1'
 }
 
 subprojects {
+    apply plugin: 'io.quarkus'
+    apply plugin: 'org.kordamp.gradle.jandex'
+
     group 'org.acme'
     version '1.0.0-SNAPSHOT'
+
+    tasks.named("quarkusDependenciesBuild") {
+        inputs.files(tasks.getByPath("jandex").outputs.files)
+    }
+    tasks.named("imageBuild") {
+        inputs.files(tasks.getByPath("jandex").outputs.files)
+    }
+    tasks.named("imagePush") {
+        inputs.files(tasks.getByPath("jandex").outputs.files)
+    }
 }
