@@ -1,0 +1,42 @@
+# Quarkus http function
+
+This project uses https://quarkus.io/[Quarkus] and is based on the starter code for google cloud function.
+
+## Running the application in dev mode
+
+You can run your application in dev mode that enables live coding using:
+
+[source, shell]
+----
+./gradlew quarkusDev
+----
+
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+
+## Packaging and running the application
+
+The application can be packaged using:
+
+[source, shell]
+----
+./gradlew build
+----
+
+It produces a _über-jar_ : `build/quarkus-http-function-1.0.0-SNAPSHOT-runner.jar` containing all dependencies.
+
+## Running the cloud function locally.
+
+The `java-function-invoker` jar can be used to run the function.
+It is possible to use `jbang` to execute that jar.
+
+[source, shell]
+----
+jbang com.google.cloud.functions.invoker:java-function-invoker:1.4.1 --classpath build/quarkus-http-function-1.0.0-SNAPSHOT-runner.jar --target io.quarkus.gcp.functions.http.QuarkusHttpFunction
+----
+
+The function is available using http://localhost:8080/
+
+## Related Guides
+
+- Google Cloud Functions (https://quarkus.io/guides/gcp-functions[guide]): Write Google Cloud functions
+
